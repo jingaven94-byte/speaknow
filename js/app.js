@@ -329,15 +329,16 @@ function renderTalkView(talk){
   h += '<div style="font-size:.8125rem;opacity:.85;margin-top:2px">'+esc(talk.titleCn)+'</div>';
   h += '<div style="font-size:.75rem;opacity:.7;margin-top:4px">'+esc(talk.speaker)+' · '+talk.duration+'</div></div>';
   
-  // Video links (no embed, just buttons to open on platform)
-  h += '<div class="card"><div class="fw-6 mb-8">🎬 观看演讲</div>';
-  h += '<div class="vid-links">';
-  h += '<button class="btn btn-p btn-sm" onclick="openVideo(\'bilibili\','+talk.id+')">📺 B站观看</button>';
-  h += '<button class="btn btn-o btn-sm" onclick="openVideo(\'youtube\','+talk.id+')">▶️ YouTube</button>';
-  h += '<button class="btn btn-g btn-sm" onclick="openVideo(\'ted\','+talk.id+')">🌐 TED官网</button>';
+  // Video embed - YouTube
+  h += '<div class="card" style="padding:12px"><div class="fw-6 mb-8">🎬 观看演讲</div>';
+  h += '<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;margin-bottom:8px">';
+  h += '<iframe src="https://www.youtube.com/embed/'+talk.youtube+'?rel=0" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px"></iframe>';
   h += '</div>';
-  h += '<div class="tm mt-8" style="font-size:.75rem">💡 B站（国内推荐）无需翻墙即可观看</div></div>';
-  
+  h += '<div class="flex" style="justify-content:center;gap:8px;flex-wrap:wrap">';
+  h += '<button class="btn btn-sm btn-g" onclick="openVideo(\'youtube\','+talk.id+')">▶️ YouTube 打开</button>';
+  h += '<button class="btn btn-sm btn-g" onclick="openVideo(\'bilibili\','+talk.id+')">📺 B站备用</button>';
+  h += '<button class="btn btn-sm btn-g" onclick="openVideo(\'ted\','+talk.id+')">🌐 TED官网</button>';
+  h += '</div></div>';
   // Full script
   h += '<div class="card"><div class="fw-6 mb-8">📜 完整演讲稿</div>';
   if(talk.lines && talk.lines.length > 0){
